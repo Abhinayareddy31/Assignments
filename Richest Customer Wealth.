@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Input number of customers and banks
+        System.out.print("Enter number of customers: ");
+        int rows = sc.nextInt();
+
+        System.out.print("Enter number of banks: ");
+        int cols = sc.nextInt();
+
+        int[][] accounts = new int[rows][cols];
+
+        // Input account balances
+        System.out.println("Enter account balances:");
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                accounts[i][j] = sc.nextInt();
+            }
+        }
+
+        int maxWealth = 0;
+
+        // Find richest customer
+        for (int i = 0; i < rows; i++) {
+
+            int wealth = 0;
+
+            for (int j = 0; j < cols; j++) {
+                wealth = wealth + accounts[i][j];
+            }
+
+            if (wealth > maxWealth) {
+                maxWealth = wealth;
+            }
+        }
+
+        // Output
+        System.out.println("Richest Customer Wealth = " + maxWealth);
+
+        sc.close();
+    }
+}
