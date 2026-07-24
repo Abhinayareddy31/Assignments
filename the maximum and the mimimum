@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class Main {
+
+    // Method to find maximum
+    static void findMaximum(int a, int b, int c) {
+        if (a >= b && a >= c) {
+            System.out.println("Maximum Number = " + a);
+        } else if (b >= a && b >= c) {
+            System.out.println("Maximum Number = " + b);
+        } else {
+            System.out.println("Maximum Number = " + c);
+        }
+    }
+
+    // Method to find minimum
+    static void findMinimum(int a, int b, int c) {
+        if (a <= b && a <= c) {
+            System.out.println("Minimum Number = " + a);
+        } else if (b <= a && b <= c) {
+            System.out.println("Minimum Number = " + b);
+        } else {
+            System.out.println("Minimum Number = " + c);
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Input
+        System.out.print("Enter first number: ");
+        int num1 = sc.nextInt();
+
+        System.out.print("Enter second number: ");
+        int num2 = sc.nextInt();
+
+        System.out.print("Enter third number: ");
+        int num3 = sc.nextInt();
+
+        // Call methods
+        findMaximum(num1, num2, num3);
+        findMinimum(num1, num2, num3);
+
+        sc.close();
+    }
+}
