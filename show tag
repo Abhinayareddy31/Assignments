@@ -1,0 +1,118 @@
+import java.util.*;
+
+public class StringProblems {
+
+    // 1. Reverse String
+    public static String reverseString(String s) {
+        char[] arr = s.toCharArray();
+        int left = 0, right = arr.length - 1;
+
+        while (left < right) {
+            char temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+
+            left++;
+            right--;
+        }
+
+        return new String(arr);
+    }
+
+
+    // 2. Valid Palindrome
+    public static boolean isPalindrome(String s) {
+        s = s.toLowerCase().replaceAll("[^a-z0-9]", "");
+
+        int left = 0;
+        int right = s.length() - 1;
+
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right))
+                return false;
+
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+
+
+    // 3. Valid Anagram
+    public static boolean isAnagram(String s, String t) {
+        if (s.length() != t.length())
+            return false;
+
+        int[] count = new int[26];
+
+        for (char c : s.toCharArray())
+            count[c - 'a']++;
+
+        for (char c : t.toCharArray())
+            count[c - 'a']--;
+
+        for (int x : count) {
+            if (x != 0)
+                return false;
+        }
+
+        return true;
+    }
+
+
+    // 4. Longest Common Prefix
+    public static String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0)
+            return "";
+
+        String prefix = strs[0];
+
+        for (int i = 1; i < strs.length; i++) {
+            while (!strs[i].startsWith(prefix)) {
+                prefix = prefix.substring(0, prefix.length() - 1);
+
+                if (prefix.isEmpty())
+                    return "";
+            }
+        }
+
+        return prefix;
+    }
+
+
+    // 5. Defang IP Address
+    public static String defangIPaddr(String address) {
+        return address.replace(".", "[.]");
+    }
+
+
+    // 6. Length of Last Word
+    public static int lengthOfLastWord(String s) {
+        String[] words = s.trim().split(" ");
+        return words[words.length - 1].length();
+    }
+
+
+    public static void main(String[] args) {
+
+        System.out.println("Reverse String:");
+        System.out.println(reverseString("hello"));
+
+        System.out.println("\nValid Palindrome:");
+        System.out.println(isPalindrome("A man, a plan, a canal: Panama"));
+
+        System.out.println("\nValid Anagram:");
+        System.out.println(isAnagram("anagram", "nagaram"));
+
+        System.out.println("\nLongest Common Prefix:");
+        String[] arr = {"flower", "flow", "flight"};
+        System.out.println(longestCommonPrefix(arr));
+
+        System.out.println("\nDefang IP Address:");
+        System.out.println(defangIPaddr("192.168.1.1"));
+
+        System.out.println("\nLength of Last Word:");
+        System.out.println(lengthOfLastWord("Hello World"));
+    }
+}
