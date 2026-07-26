@@ -1,0 +1,48 @@
+import java.util.*;
+
+class Solution {
+
+    List<Integer>[] graph;
+    long answer = 0;
+
+    public long maxOutput(int n, int[][] edges, int[] price) {
+
+        graph = new ArrayList[n];
+
+        for (int i = 0; i < n; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int[] edge : edges) {
+            graph[edge[0]].add(edge[1]);
+            graph[edge[1]].add(edge[0]);
+        }
+
+        dfs(0, -1, price);
+
+        return answer;
+    }
+
+    private long[] dfs(int node, int parent, int[] price) {
+
+        long withLeaf = price[node];
+        long withoutLeaf = 0;
+
+        for (int next : graph[node]) {
+
+            if (next == parent) {
+                continue;
+            }
+
+            long[] child = dfs(next, node, price);
+
+            answer = Math.max(answer, withLeaf + child[1]);
+            answer = Math.max(answer, withoutLeaf + child[0]);
+
+            withLeaf = Math.max(withLeaf, child[0] + price[node]);
+            withoutLeaf = Math.max(withoutLeaf, child[1] + price[node]);
+        }
+
+        return new long[]{withLeaf, withoutLeaf};
+    }
+}
