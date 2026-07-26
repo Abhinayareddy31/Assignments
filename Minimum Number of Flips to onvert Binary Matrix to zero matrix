@@ -1,0 +1,64 @@
+import java.util.*;
+
+class Solution {
+    public int minFlips(int[][] mat) {
+        int m = mat.length;
+        int n = mat[0].length;
+
+        int start = 0;
+
+        // Convert matrix to bitmask
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (mat[i][j] == 1) {
+                    start |= (1 << (i * n + j));
+                }
+            }
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+        Set<Integer> visited = new HashSet<>();
+
+        queue.offer(start);
+        visited.add(start);
+
+        int[][] dir = {{0,0},{1,0},{-1,0},{0,1},{0,-1}};
+        int steps = 0;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+
+            for (int k = 0; k < size; k++) {
+                int curr = queue.poll();
+
+                if (curr == 0)
+                    return steps;
+
+                for (int i = 0; i < m; i++) {
+                    for (int j = 0; j < n; j++) {
+
+                        int next = curr;
+
+                        for (int[] d : dir) {
+                            int x = i + d[0];
+                            int y = j + d[1];
+
+                            if (x >= 0 && x < m && y >= 0 && y < n) {
+                                next ^= (1 << (x * n + y));
+                            }
+                        }
+
+                        if (!visited.contains(next)) {
+                            visited.add(next);
+                            queue.offer(next);
+                        }
+                    }
+                }
+            }
+
+            steps++;
+        }
+
+        return -1;
+    }
+}
