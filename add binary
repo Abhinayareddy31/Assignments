@@ -1,0 +1,18 @@
+import java.util.Scanner;
+import java.math.BigInteger;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String binary1 = sc.next();
+        String binary2 = sc.next();
+
+        BigInteger num1 = new BigInteger(binary1, 2);
+        BigInteger num2 = new BigInteger(binary2, 2);
+
+        BigInteger sum = num1.add(num2);
+
+        System.out.println(sum.toString(2));
+    }
+}
