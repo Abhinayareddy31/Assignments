@@ -1,0 +1,26 @@
+public class Main {
+
+    // Public main() - JVM calls this method
+    public static void main(String[] args) {
+        System.out.println("Public main() - Program Started");
+
+        main(10);
+        main(10.5);
+        main();
+    }
+
+    // Private main()
+    private static void main(int a) {
+        System.out.println("Private main(int): " + a);
+    }
+
+    // Protected main()
+    protected static void main(double b) {
+        System.out.println("Protected main(double): " + b);
+    }
+
+    // Default (package-private) main()
+    static void main() {
+        System.out.println("Default main()");
+    }
+}
